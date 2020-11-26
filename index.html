@@ -10,43 +10,42 @@
     <header>
         <h2>Basic calculator</h2>
     </header>
-
     <main>
         <div class="container">
-            <div class="calculatorDisplay">
-                <input class="calculatorDisplay__display" type="text" name="display" id="display">
-            </div>
-            <div class="operators">
-                <button class="operators__button">+</button>
-                <button class="operators__button">-</button>
-                <button class="operators__button">x</button>
-                <button class="operators__button">÷</button>
-            </div>
-            <div class="mainButtons">
-                <div class="operands">
-                    <div class="operands__row">
-                        <button class="operands__button">7</button>
-                        <button class="operands__button">8</button>
-                        <button class="operands__button">9</button>
+            <input class="container__display" type="text" maxlength="15" tabindex="1">
+            <div class="container__buttons">
+                <div class="container__buttons--left">
+                    <div class="operators">
+                        <button class="operator" tabindex="2">+</button>
+                        <button class="operator" tabindex="3">-</button>
+                        <button class="operator" tabindex="4">x</button>
                     </div>
-                    <div class="operands__row">
-                        <button class="operands__button">4</button>
-                        <button class="operands__button">5</button>
-                        <button class="operands__button">6</button>
-                    </div>
-                    <div class="operands__row">
-                        <button class="operands__button">1</button>
-                        <button class="operands__button">2</button>
-                        <button class="operands__button">3</button>
-                    </div>
-                    <div class="operands__row">
-                        <button class="operands__button">0</button>
-                        <button class="operands__button">.</button>
-                        <button class="operands__button">C</button>
+                    <div class="operands">
+                        <div class="operands__row">
+                            <button class="operand" tabindex="6"> 7</button>
+                            <button class="operand" tabindex="7"> 8</button>
+                            <button class="operand" tabindex="8"> 9</button>
+                        </div>
+                        <div class="operands__row">
+                            <button class="operand" tabindex="9"> 4</button>
+                            <button class="operand" tabindex="10"> 5</button>
+                            <button class="operand" tabindex="11"> 6</button>
+                        </div>
+                        <div class="operands__row">
+                            <button class="operand" tabindex="12"> 1</button>
+                            <button class="operand" tabindex="13"> 2</button>
+                            <button class="operand" tabindex="14"> 3</button>
+                        </div>
+                        <div class="operands__row">
+                            <button class="operand" tabindex="15"> 0</button>
+                            <button class="operand" tabindex="16"> .</button>
+                            <button class="operand" tabindex="17"> C</button>
+                        </div>
                     </div>
                 </div>
-                <div class="calculate">
-                    <button class="calculate__button">=</button>
+                <div class="container__buttons--right">
+                    <button class="operator operator--right" tabindex="5">÷</button>
+                    <button class="calculate" tabindex="18">=</button>
                 </div>
             </div>
         </div>
