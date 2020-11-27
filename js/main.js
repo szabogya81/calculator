@@ -12,37 +12,95 @@ const operands = [];
 let currentOperand = [];
 let previousIsOperand = false;
 
-clearButton.addEventListener('click', clearInput);
-calculateButton.addEventListener('click', calculateResult);
+clearButton.addEventListener('click', initCalculator);
+calculateButton.addEventListener('click', showResult);
 operandButtons.forEach(button => button.addEventListener('click', handleOperand));
 operatorButtons.forEach(button => button.addEventListener('click', handleOperator));
 
 clearButton.addEventListener('keypress', handleKeyPress);
-calculateButton.addEventListener('keypress', calculateResult);
+calculateButton.addEventListener('keypress', handleKeyPress);
 operandButtons.forEach(button => button.addEventListener('keypress', handleKeyPress));
 operatorButtons.forEach(button => button.addEventListener('keypress', handleKeyPress));
 
-function clearInput() {
+function initCalculator() {
     display.value = '';
     display.classList.remove('container__display--long');
+    resetOperationVariables(false);
+    disableButtons(true, true, false);
+}
+
+function showResult() {
+    if(operators.length > 0 && operands.length === operators.length + 1) {
+        setResult(calculateResult());
+        setDisplay();
+    }
+    else {
+        initCalculator();
+        handleError();
+    }  
+}
+
+function resetOperationVariables(previousIsOperandValue) {
     operators.splice(0, operators.length);
     operands.splice(0, operands.length);
-    calculateButton.disabled = true;
     currentOperand = [];
-    previousIsOperand = false;
-    operatorButtons.forEach(operatorButton => operatorButton.disabled = true);
+    previousIsOperand = previousIsOperandValue;
 }
 
 function calculateResult() {
-    //TODO: implement calc logic and show result
+    let result = parseOperand(operands[0]);
+    for(let i = 0; i < operators.length; i++) {
+        result = calculateSubResult(result, parseOperand(operands[i + 1]), operators[i])
+    }
+    return result;
+}
+
+function calculateSubResult(subValue, nextValue, operator) {
+    if(operator === '+') {
+        return addNumbers(subValue, nextValue);
+    } else if(operator === '-') {
+        return subtractNumbers(subValue, nextValue);
+    }  else if(operator === '*') {
+        return multiplyNumbers(subValue, nextValue);
+    }  else if(operator === '/') {
+        return divideNumbers(subValue, nextValue);
+    }
+}
+
+const parseOperand = (operand) => operand.includes('.') ? parseFloat(operand) : parseInt(operand);
+const addNumbers = (x, y) =>  x + y;
+const subtractNumbers = (x, y) => x - y;
+const multiplyNumbers = (x, y) => x * y;
+const divideNumbers = (x, y) => x / y;
+
+function setResult(result) {
+    if(isNaN(result) || result === Infinity || result === -Infinity) {
+        handleError();
+    } else {
+        display.value = result;
+        resetOperationVariables(true);
+        operands.push(result.toString());
+        disableButtons(true, false, true);
+    }
+}
+
+function handleError() {
+    display.value = 'ERROR'
+    disableButtons(true, true, true);
+}
+
+function disableButtons(calculate, operator, operand) {
+    calculateButton.disabled = calculate;
+    operatorButtons.forEach(operatorButton => operatorButton.disabled = operator);
+    operandButtons.forEach(operandButton => operandButton.disabled = operand);
 }
 
 function handleOperand(e) {
     currentOperand.push(e.currentTarget.value);
     fillOperands();
     previousIsOperand = true;
-    singFloatButton.disabled = currentOperand.includes('.');
     updateCalculator(e);
+    singFloatButton.disabled = currentOperand.includes('.');
     handleCalculateButton();
 }
 
@@ -50,7 +108,7 @@ function handleOperator(e) {
     currentOperand = [];
     operators.push(e.currentTarget.value);
     previousIsOperand = false;
-    updateCalculator(e);
+    updateCalculator(e, true);
     handleCalculateButton();
 }
 
@@ -62,28 +120,41 @@ function handleKeyPress(e) {
         } else if(e.currentTarget.classList.contains('operator')) {
             handleOperator(e);
         } else if(e.currentTarget.classList.contains('operand--clear')) {
-            clearInput();
+            initCalculator();
         } else if(e.currentTarget.classList.contains('calculate')) {
-            calculateResult();
+            showResult();
         }
     }
 }
 
 function fillOperands() {
     if(previousIsOperand) {
-        operands[operands.length -1 ] = currentOperand.join('');
+        operands[operands.length -1] = currentOperand.join('');
     } else {
         operands.push(currentOperand.join(''));
     }
 }
 
-function updateCalculator(e) {
+function updateCalculator(e, isOperator = false) {
     display.value += e.currentTarget.value.replace('*', 'x').replace('/', '÷');
+    setDisplay();
+    setButtons(e, isOperator);
+}
+
+function setDisplay() {
     if(display.value.length > 40) {
         display.classList.add('container__display--long');
+    } else {
+        display.classList.remove('container__display--long');
     }
+}
+
+function setButtons(e, isOperator = false) {
     operatorButtons.forEach(operatorButton => 
         operatorButton.disabled = !previousIsOperand ||  e.currentTarget.value === '.');
+    operandButtons.forEach(operandButton => 
+        operandButton.disabled = previousIsOperand && isOperator);
+    singFloatButton.disabled = isOperator;
 }
 
 function handleCalculateButton() {
