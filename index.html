@@ -12,40 +12,40 @@
     </header>
     <main>
         <div class="container">
-            <input class="container__display" type="text" maxlength="15" tabindex="1">
+            <textarea class="container__display" cols="20" rows="2" tabindex="-1" readonly="true"></textarea>
             <div class="container__buttons">
                 <div class="container__buttons--left">
                     <div class="operators">
-                        <button class="operator" tabindex="2">+</button>
-                        <button class="operator" tabindex="3">-</button>
-                        <button class="operator" tabindex="4">x</button>
+                        <button class="operator" tabindex="1" value="+" disabled="true">+</button>
+                        <button class="operator" tabindex="2" value="-" disabled="true">-</button>
+                        <button class="operator" tabindex="3" value="*" disabled="true">x</button>
                     </div>
                     <div class="operands">
                         <div class="operands__row">
-                            <button class="operand" tabindex="6"> 7</button>
-                            <button class="operand" tabindex="7"> 8</button>
-                            <button class="operand" tabindex="8"> 9</button>
+                            <button class="operand" tabindex="5" value="7">7</button>
+                            <button class="operand" tabindex="6" value="8">8</button>
+                            <button class="operand" tabindex="7" value="9">9</button>
                         </div>
                         <div class="operands__row">
-                            <button class="operand" tabindex="9"> 4</button>
-                            <button class="operand" tabindex="10"> 5</button>
-                            <button class="operand" tabindex="11"> 6</button>
+                            <button class="operand" tabindex="8" value="4">4</button>
+                            <button class="operand" tabindex="9" value="5">5</button>
+                            <button class="operand" tabindex="10" value="6">6</button>
                         </div>
                         <div class="operands__row">
-                            <button class="operand" tabindex="12"> 1</button>
-                            <button class="operand" tabindex="13"> 2</button>
-                            <button class="operand" tabindex="14"> 3</button>
+                            <button class="operand" tabindex="11" value="1">1</button>
+                            <button class="operand" tabindex="12" value="2">2</button>
+                            <button class="operand" tabindex="13" value="3">3</button>
                         </div>
                         <div class="operands__row">
-                            <button class="operand" tabindex="15"> 0</button>
-                            <button class="operand" tabindex="16"> .</button>
-                            <button class="operand" tabindex="17"> C</button>
+                            <button class="operand" tabindex="14" value="0">0</button>
+                            <button class="operand operand--float" tabindex="15" value="." disabled="true">.</button>
+                            <button class="operand--clear" tabindex="16" value='C'>C</button>
                         </div>
                     </div>
                 </div>
                 <div class="container__buttons--right">
-                    <button class="operator operator--right" tabindex="5">÷</button>
-                    <button class="calculate" tabindex="18">=</button>
+                    <button class="operator operator--right" tabindex="4" value="/"  disabled="true">÷</button>
+                    <button class="calculate" tabindex="17" value="=" disabled="true">=</button>
                 </div>
             </div>
         </div>
