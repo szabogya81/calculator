@@ -50,28 +50,18 @@ function resetOperationVariables(previousIsOperandValue) {
 function calculateResult() {
     let result = parseOperand(operands[0]);
     for(let i = 0; i < operators.length; i++) {
-        result = calculateSubResult(result, parseOperand(operands[i + 1]), operators[i])
+        result = calculates[operators[i]](result, parseOperand(operands[i + 1]));
     }
     return result;
 }
 
-function calculateSubResult(subValue, nextValue, operator) {
-    if(operator === '+') {
-        return addNumbers(subValue, nextValue);
-    } else if(operator === '-') {
-        return subtractNumbers(subValue, nextValue);
-    }  else if(operator === '*') {
-        return multiplyNumbers(subValue, nextValue);
-    }  else if(operator === '/') {
-        return divideNumbers(subValue, nextValue);
-    }
+const calculates = {
+    '+': (x, y) => x + y,
+    '-': (x, y) => x - y,
+    '*': (x, y) => x * y,
+    '/': (x, y) => x / y
 }
-
 const parseOperand = (operand) => operand.includes('.') ? parseFloat(operand) : parseInt(operand);
-const addNumbers = (x, y) =>  x + y;
-const subtractNumbers = (x, y) => x - y;
-const multiplyNumbers = (x, y) => x * y;
-const divideNumbers = (x, y) => x / y;
 
 function setResult(result) {
     if(isNaN(result) || result === Infinity || result === -Infinity) {
