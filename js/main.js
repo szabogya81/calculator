@@ -55,13 +55,14 @@ function calculateResult() {
     return result;
 }
 
+const parseOperand = (operand) => operand.includes('.') ? parseFloat(operand) : parseInt(operand);
+
 const calculates = {
     '+': (x, y) => x + y,
     '-': (x, y) => x - y,
     '*': (x, y) => x * y,
     '/': (x, y) => x / y
 }
-const parseOperand = (operand) => operand.includes('.') ? parseFloat(operand) : parseInt(operand);
 
 function setResult(result) {
     if(isNaN(result) || result === Infinity || result === -Infinity) {
