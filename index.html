@@ -10,7 +10,7 @@
     <header>
         <h2>Basic calculator</h2>
     </header>
-    <main>
+    <main class="main">
         <div class="container">
             <textarea class="container__display" cols="20" rows="2" tabindex="-1" readonly="true"></textarea>
             <div class="container__buttons">
@@ -48,6 +48,27 @@
                     <button class="calculate" tabindex="17" value="=" disabled="true">=</button>
                 </div>
             </div>
+        </div>
+        <div class="info">
+            <article>
+                <h3>Számológép útmutató:</h3>
+                <p>
+                    A számológép egész, és tört számokon képes elvégezni a négy alapműveletet:
+                    <ul>
+                        <li>Összeadás (+)</li>
+                        <li>Kivonás (-)</li>
+                        <li>Szorzás (x)</li>
+                        <li>Osztás (÷)</li>
+                    </ul>
+                    A műveletek sorban, balról jobbra hajtónak végre, a precedencia szabályok nem érvényesülnek.
+                    </br>A gombok az aktuálisan bevitt adatoktól függően válnak elérhetővé, vagy inkatívvá pl.: 
+                    </br>Operátor után nem jöhet újra operátor. 
+                    </br>Tizedespont csak egyszer szerepelhet a racionális számban.
+                    </br>Az egyenlőség jel (zöld, enegdélyezett állapotban történő) megnyomására kerül kiszámítása az eddig felvett kifejezés.
+                    </br>A kiszámított eredmény a kijelzőn látható, melyet aztán fel lehet használni, egy következő számításhoz, vagy törölhető a C gombbal.
+                    </br>Az egyes gombokon TAB segítségével is végig lehet lépkedni, és ENTER hatására egér nélkül bevinni a kívánt értéket.    
+                </p>
+            </article>
         </div>
     </main>
 

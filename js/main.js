@@ -93,6 +93,7 @@ function disableButtons(calculate, operator, operand) {
     calculateButton.disabled = calculate;
     operatorButtons.forEach(operatorButton => operatorButton.disabled = operator);
     operandButtons.forEach(operandButton => operandButton.disabled = operand);
+    singFloatButton.disabled = true;
 }
 
 function handleOperand(e) {
